@@ -1,0 +1,22 @@
+{
+  "name": "assignment-2-node-modules-and-packages-yol256",
+  "version": "1.0.0",
+  "description": "Start out with the version of the simple HTTP server example from class that's included in this project.  This is a working HTTP file server. You'll be making several modifications to the starter code, and adding some files of your own.",
+  "main": "mime.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarvardDCENode/assignment-2-node-modules-and-packages-yol256.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarvardDCENode/assignment-2-node-modules-and-packages-yol256/issues"
+  },
+  "homepage": "https://github.com/HarvardDCENode/assignment-2-node-modules-and-packages-yol256#readme",
+  "dependencies": {
+    "log-util": "^2.3.0"
+  }
+}
