@@ -5,17 +5,14 @@ const http = require('http');
 //const url = require('url');
 const path = require('path');
 const fs = require('fs');
+const log = require('log-util');
+const mime = require('./mime');
+const url = require('url');
 
 var server = http.createServer((req, res) => {
-	console.log(req.url);
+	log.info(req.url);
 
-	const mimeTypes = {
-    'html' : "text/html",
-    'css'  : "text/css",
-    'js'   : "text/javascript",
-    'png'  : "image/png",
-    'jpg'  : "image/jpg"
-  };
+	
 
 	// parse the URL into its component parts
 	console.log(`Requested URL: ${req.url}`);
@@ -29,6 +26,8 @@ var server = http.createServer((req, res) => {
 		res.end("Error 400: Bad Request");
 		return;
 	}
+	console.log(parsedUrl.query);
+
  	// extract the pathname and query properties
     const { pathname, query } = parsedUrl;
 	// output absolute path info
@@ -38,12 +37,13 @@ var server = http.createServer((req, res) => {
   var contentType = 'text/plain';
 	// Extract the filename extension
 	//  then set the mimetype if it is known
-  var extname = String(path.extname(pathname)).toLowerCase();
-  contentType = mimeTypes[extname] || contentType;
+  var extname = String(path.extname(pathname)).toLowerCase().slice(1);
+  contentType = mime(extname);
+  log.info('extname=${extname} contentType=${contentType}');
 
 	// Create an absolute path to the requested file.
 	// Assume the server was started from the webroot
-	const absolute_path_to_file = path.join(__dirname, pathname);
+	const absolute_path_to_file = path.join(__dirname, 'htdocs', pathname);
 	console.log('absolute_path_to_file is %s', absolute_path_to_file);
 
 	fs.readFile(absolute_path_to_file, (err, data) => {
